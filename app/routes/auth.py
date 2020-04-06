@@ -4,8 +4,9 @@ from flask import (Blueprint, flash, g, redirect, render_template, request,
                    session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app.models import User
-from app.extensions import db
+from app.extensions import auth, db
+import requests.exceptions
+import json 
 
 from time import time
 from sys import platform
@@ -19,27 +20,40 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 def register():
     if request.method == 'POST':
         email = request.form['email']
-        password = generate_password_hash(request.form['password'])
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        major = request.form['major']
-        year = request.form['year']
+        password = request.form['password']
+
         error = None
-        find_one = User.query.filter_by(email=email).first()
 
         if not email:
             error = 'Email is required.'
         elif not password:
             error = 'Password is required.'
-        elif find_one is not None:
-            error = 'User {} is already registered.'.format(email)
 
+        try:
+            user = auth.create_user_with_email_and_password(email, password)
+        except requests.exceptions.HTTPError as e:
+            error = json.loads(e.args[1])['error']['message']
+            print(error)
+
+        
         if error is None:
-            user = User(email=email, password=password, first_name=first_name, last_name=last_name, major=major, year=year)
-            db.session.add(user)
-            db.session.commit()
-            print(User.query.all())
+            data = {
+                "first_name":request.form['first_name'],
+                "last_name":request.form['last_name'],
+                "email":email,
+                "major":request.form['major'],
+                "year":request.form['year']
+            }
 
+            # try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            # except:
+            #     print(user)
+
+            results = db.child("users").child(user["localId"]).set(data)
+            session.clear()
+            session['user'] = user
+            print(results)
             return redirect(url_for('dashboard'))
 
         flash(error)
@@ -53,16 +67,17 @@ def login():
         password = request.form['password']
 
         error = None
-        user = User.query.filter_by(email=email).first()
 
-        if user is None or not check_password_hash(user.password, password):
-            error = 'The username and password you entered did not match our records. Please double-check and try again'
-
-        flash(error)
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+        except requests.exceptions.HTTPError as e:
+            error = json.loads(e.args[1])['error']['message']
+            print(error)
+            flash("Invalid Credentials")
 
         if error is None:
             session.clear()
-            session['user_id'] = user.id
+            session['user'] = user
             return redirect(url_for('dashboard'))
 
     return render_template('/auth/login.html')
@@ -73,13 +88,14 @@ def login():
 def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
     the database into ``g.user``."""
-    user_id = session.get("user_id")
+    user = session.get("user")
 
-    print(user_id)
-    if user_id is None:
+    print(user)
+    if user is None:
         g.user = None
     else:
-        g.user = User.query.filter_by(id=user_id).first()
+        g.user = user
+    pass
 
 
 def login_required(view):
@@ -88,7 +104,6 @@ def login_required(view):
     def wrapped_view(**kwargs):
         if g.user is None:
             return redirect(url_for('auth.login'))
-
         return view(**kwargs)
 
     return wrapped_view
@@ -97,4 +112,5 @@ def login_required(view):
 @bp.route('/logout')
 def logout():
     session.clear()
+    auth.current_user = None #https://github.com/thisbejim/Pyrebase/issues/284
     return redirect(url_for('auth.login'))
