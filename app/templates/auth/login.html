@@ -7,14 +7,17 @@
 <!-- You can change Register to anything else.-->
 {% endblock %} {% block content %}
 <!-- All your body content goes here! -->
-<nav class="navbar sticky-top">
-    <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
-</nav>
+{% from "components.html" import navbar_logged_out with context %}
+{{navbar_logged_out()}}
 
-<div class="container-login100">
+<div class="container-login100 mx-auto">
     <div class="wrap-login100">
+      <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="flash d-flex justify-content-center">{{ message }}</div>
+        {% endfor %} {% block content3 %} {% endblock %}
+      </div>
       <h1>Login</h1>
-
       <div class="container justify-content-center text-center" >
         <form method="post">
             <input
@@ -35,7 +38,6 @@
             <br>
             <input type="submit" value="Log In" />
         </form>
-
         <a href="/forgot">Forgot Password?</a><br>
         Don't have an account? 
         <a href="{{ url_for('auth.register') }}">Register here</a>

@@ -16,9 +16,12 @@
         <header>
             {% block header %}{% endblock %}
         </header>
-        {% for message in get_flashed_messages() %}
+
+        <!-- {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
-        {% endfor %} {% block content %} {% endblock %}
+        {% endfor %} -->
+        {% block content %} {% endblock %} 
+
         <script
             src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

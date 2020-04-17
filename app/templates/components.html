@@ -1,0 +1,26 @@
+{% macro navbar_logged_in() %}
+<nav class="navbar sticky-top">
+    <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
+    <div class="dropdown">
+        <button 
+            type="button" 
+            class="btn btn-outline-light dropdown-toggle" 
+            data-toggle="dropdown">
+            Hello Frontend Team!
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Portfolio</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
+                >Logout</a
+            >
+        </div>
+    </div>
+</nav>
+{% endmacro %}
+
+{% macro navbar_logged_out() %}
+<nav class="navbar sticky-top">
+    <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
+</nav>
+{% endmacro %}
