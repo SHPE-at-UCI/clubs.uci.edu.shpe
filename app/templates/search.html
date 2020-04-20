@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+<!--Import the <head> from 'base.html'-->
+{% block header %}
+<title>SHPE UCI - Dashboard</title>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+{% block title %}
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<nav class="navbar sticky-top">
+    <a class="navbar-brand" href="/dashboard">SHPE | UCI Portal</a>
+    <div class="dropdown">
+        <button
+                type="button"
+                class="btn btn-outline-light dropdown-toggle"
+                data-toggle="dropdown">
+            Hello Frontend Team!
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="#">Search</a>
+            <a class="dropdown-item" href="#">Portfolio</a>
+            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container px-4" id="search-container">
+    <section class="row">
+        <div class="col" id="search">
+            <form>
+                <fieldset>
+                    <input onkeyup="filterSearch()" autocomplete="off" autofocus="autofocus" class="query"
+                           id="alumni_search" placeholder="Search" type="search">
+                    <p id="searchDescription">Find SHPE | UCI Alumni.</p>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</div>
+
+<div class="container px-4" id="results-container">
+    <div id="results">
+        <ul id="user_results">
+            {% for user_dict in users %}
+            <li style="display: block"><a href="#">{{ user_dict['first_name'] + ' ' + user_dict['last_name'] }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+function filterSearch() {
+    var users = {{ users|tojson }}
+    console.log(users);
+    var input = document.getElementById("alumni_search");
+
+    var filter = input.value.toUpperCase();
+
+    var searchDesc = document.getElementById("searchDescription");
+
+    var ul = document.getElementById("user_results");
+    var li = ul.getElementsByTagName("li");
+
+    for (i = 0; i < li.length; i++) {
+        var a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        }
+        else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+</script>
+
+{% endblock %}

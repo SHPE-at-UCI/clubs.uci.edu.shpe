@@ -20,11 +20,10 @@
             Hello Frontend Team!
         </button>
         <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/search">Search</a>
             <a class="dropdown-item" href="#">Portfolio</a>
             <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
-                >Logout</a
-            >
+            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
         </div>
     </div>
 </nav>
@@ -110,7 +109,8 @@
                     <input type="file" class="form-control">
                 </div>
                 <button type="submit" value="submit">Submit</button>
-        </form>
+            </form>
+        </div>
 	</div>
 </div>
 

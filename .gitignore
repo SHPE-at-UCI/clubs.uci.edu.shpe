@@ -16,3 +16,6 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# PyCharm
+.idea/

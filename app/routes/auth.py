@@ -33,7 +33,10 @@ def register():
             user = auth.create_user_with_email_and_password(email, password)
         except requests.exceptions.HTTPError as e:
             error = json.loads(e.args[1])['error']['message']
-            print(error)
+            if error == "EMAIL_EXISTS":
+                flash("Email already in use. Please Sign In.")
+            else:
+                flash("An error has occurred.")
 
         
         if error is None:
@@ -45,18 +48,12 @@ def register():
                 "year":request.form['year']
             }
 
-            # try:
             user = auth.sign_in_with_email_and_password(email, password)
-            # except:
-            #     print(user)
 
             results = db.child("users").child(user["localId"]).set(data)
             session.clear()
             session['user'] = user
-            print(results)
             return redirect(url_for('dashboard'))
-
-        flash(error)
     return render_template('/auth/register.html')
 
 

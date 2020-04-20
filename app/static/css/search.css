@@ -1,0 +1,125 @@
+/* css specific for the search.html file */
+
+/*navbar related css*/
+.navbar {
+    background-color: #0071C5;
+    box-shadow: 0px 0px 20px black;
+    color: gray;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(255, 170, 59);
+}
+
+body {
+    font: 18px;
+    background-color: rgb(243, 243, 243);
+}
+
+h2 {
+    color: #0071C5;
+}
+
+
+#search {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#search form {
+    /*background-color: red;*/
+    height: 320px;
+    display: block;
+    position: relative;
+    -webkit-user-select: none;
+    cursor: text;
+}
+
+#search form fieldset {
+
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+}
+
+#search form input {
+    color: #0071C5;
+    /*text-transform: uppercase;*/
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 1.2em;
+    border: 0 solid #98989f;
+    border-bottom: 1px solid grey;
+    background: 0 0;
+    font-size: 3em;
+    -webkit-appearance: none;
+}
+
+#search form fieldset p {
+    margin-top: 24px;
+}
+
+#results-container {
+
+}
+
+#results {
+    width: 100%;
+}
+
+#user_results {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#user_results li a {
+  border-radius: 4px;
+  box-shadow: 0px 1px 8px #c3c3c3;
+  margin-bottom: 20px; /* Prevent double borders */
+  background-color: white;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#user_results li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+input:focus {
+    outline: none;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #0071C5;
+}
+:-moz-placeholder, ::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #0071C5;
+   opacity:  1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #0071C5;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #0071C5;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #0071C5;
+}

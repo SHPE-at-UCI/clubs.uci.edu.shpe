@@ -2,60 +2,74 @@
 
 <h1>
     {% block title %}
-    <div class="text-center">Register to the SHPE Member Portal</div>
+    <title>SHPE UCI - Registration</title>
+    <link rel="stylesheet" href="../../static/css/register.css"/>
     {% endblock %}
 </h1>
 <!-- You can change Register to anything else.-->
 {% endblock %} {% block content %}
 <!-- All your body content goes here! -->
+{% from "components.html" import navbar_logged_out with context %}
+{{navbar_logged_out()}}
 
-<div class="container text-center">
-    <form method="post">
-        <label for="first_name"> <b>First name&nbsp;&nbsp;&nbsp;</b> </label>
-        <input
-            name="first_name"
-            placeholder="Enter first name"
-            id="first_name"
-            required
-        /><br />
-        <label for="last_name"> <b>Last Name&nbsp;&nbsp;&nbsp;</b></label>
-        <input
-            placeholder="Last Name"
-            name="last_name"
-            id="last_name"
-            required
-        /><br />
-        <label for="email">
-            <b
-                >Email &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &NonBreakingSpace;</b
-            ></label
-        >
-        <input
-            class="center"
-            type="Email"
-            placeholder="Enter UCI email"
-            name="email"
-            id="email"
-            required
-        /><br />
-        <label for="password"> <b>Password &nbsp;&nbsp; &nbsp;</b> </label>
-        <input
-            type="password"
-            placeholder="Enter password"
-            name="password"
-            id="password"
-            required
-        /><br />
-        <label for="Major">
-            <b>Major &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b></label
-        >
-        <input placeholder="Major" name="major" id="major" required /><br />
-        <label for="Year">
-            <b>Year &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b></label
-        >
-        <input placeholder="Year" name="year" id="year" required /><br />
-        <input type="checkbox" name="remember" /> Remember me
+<div class="form mx-auto" >
+    <div id="registration-form">
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+            <div class="flash d-flex justify-content-center">{{ message }}</div>
+            {% endfor %} {% block content3 %} {% endblock %}
+          </div>
+        <h1 id="Form_name"> SHPE UCI Member Registration</h1>
+        <form method="post">
+            <input
+                type="text"
+                name="first_name"
+                placeholder="Enter first name"
+                id="first_name"
+                required
+            /><br />
+            <input
+                type="text"
+                placeholder="Last Name"
+                name="last_name"
+                id="last_name"
+                required
+            /><br />
+            <input
+                type="Email"
+                placeholder="Enter UCI email"
+                name="email"
+                id="email"
+                required
+            /><br />
+            <input
+                type="password"
+                placeholder="Enter password"
+                name="password"
+                id="password"
+                required
+            /><br />
+            <label for="Major">
+            <input 
+            type="text" 
+            placeholder="Major" 
+            name="major" 
+            id="major" 
+            required 
+         /> <br />
+            <input 
+            type="text" 
+            placeholder="Year" 
+            name="year" 
+            id="year" 
+            required 
+        />
+        <br>
         <input type="submit" value="Register" />
-    </form>
+        </form>
+        <br>
+        <span>Already have an account? <a href="{{ url_for('auth.login') }}">sign in</a></span>
+    </div>
 </div>
+
 {% endblock %}
