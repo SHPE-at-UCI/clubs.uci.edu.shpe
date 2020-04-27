@@ -10,23 +10,8 @@
 
 {% block content %}
 
-<nav class="navbar sticky-top">
-    <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
-    <div class="dropdown">
-        <button 
-            type="button" 
-            class="btn btn-outline-light dropdown-toggle" 
-            data-toggle="dropdown">
-            Hello Frontend Team!
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="/search">Search</a>
-            <a class="dropdown-item" href="#">Portfolio</a>
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-        </div>
-    </div>
-</nav>
+{% from "components.html" import navbar_logged_in with context %}
+{{navbar_logged_in()}}
 
 <div class="container px-4">
     <div class="row my-4">
@@ -36,8 +21,8 @@
         <div class="card bg-light">
             <div class="card-body">
                 <div class="card-title text-center">
-                    <h2>Fall<br>Quarter</h2>
-                    <h4>0 Points</h4>
+                    <h2 class="test">Fall<br>Quarter</h2>
+                    <h4>{{points.fall}} Points</h4>
                 </div>
             </div>
         </div>
@@ -45,14 +30,15 @@
             <div class="card-body">
                 <div class="card-title text-center">
                     <h2>Winter<br>Quarter</h2>
-                    <h4>0 Points</h4>
+                    <h4>{{points.winter}} Points</h4>
                 </div>
             </div>
         </div>
         <div class="card bg-light">
             <div class="card-body text-center">
                     <h2>Spring<br>Quarter</h2>
-                    <h4>0 Points</h4>
+                    <!-- -----------------------------------changed here -------------------------------------- -->
+                    <h4>{{points.spring}} Points</h4>
             </div>
         </div>
     </div>
@@ -62,40 +48,40 @@
     <div class="row my-2">
         <div class="col-5">
             <h2>SHPEtinas</h2>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-            irure dolor in reprehenderit in voluptate velit esse cillum 
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-            non proident, 
-            sunt in culpa qui officia deserunt mollit anim id est laborum." 
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum
+            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+            non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum."
         </div>
         <div class="col">
             <img class="img-fluid" src="https://canvasjs.com/wp-content/uploads/images/gallery/php-charts/overview/php-charts-graphs-index-data-label.png">
         </div>
     </div>
-    
+
     <div class="row my-2">
         <div class="col">
             <img class="img-fluid" src="https://canvasjs.com/wp-content/uploads/images/gallery/php-charts/overview/php-charts-graphs-index-data-label.png">
         </div>
         <div class="col-5">
             <h2>SHPE Familias</h2>
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
-            irure dolor in reprehenderit in voluptate velit esse cillum 
-            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-            non proident, 
-            sunt in culpa qui officia deserunt mollit anim id est laborum." 
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum
+            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+            non proident,
+            sunt in culpa qui officia deserunt mollit anim id est laborum."
         </div>
     </div>
 
     <div class="row my-2">
         <div class="col">
-            
+
         </div>
     </div>
 </div>
@@ -113,5 +99,6 @@
         </div>
 	</div>
 </div>
+
 
 {% endblock %}

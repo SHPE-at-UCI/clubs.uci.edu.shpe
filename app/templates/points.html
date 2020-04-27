@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <title>SHPE UCI - Points</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/points.css') }}"/>
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<form class="fb" action="{{url_for('points.editPoints')}}" method = 'POST'>
+
+  <div class="col">
+    <h2>Winter Quarter</h2>
+    <div class="points fb">
+      <p id="winterM" class="icon minus">-</p>
+      <input type="number" value="{{points.winter}}"  name="winterPoints" class="pointDis" id="winter"></input>
+      <p id="winterP" class="icon plus">+</p>
+    </div>
+  </div>
+
+  <div class="col">
+    <h2>Fall Quarter</h2>
+    <div class="points fb">
+      <p id="fallM" class="icon minus">-</p>
+      <input type="number" value="{{points.fall}}" name="fallPoints" class="pointDis" id="fall"></input>
+      <p id="fallP" class="icon plus">+</p>
+    </div>
+  </div>
+
+  <div class="col">
+    <h2>Spring Quarter</h2>
+    <div class="points fb">
+      <p id="springM" class="icon minus">-</p>
+      <input type="number" value="{{points.spring}}"  name="springPoints" class="pointDis" id="spring"></input>
+      <p id="springP" class="icon plus">+</p>
+    </div>
+  </div>
+
+  <input type="submit">
+</form>
+
+<script src="{{ url_for('static', filename='js/points.js') }}"></script>
+
+
+{% endblock %}

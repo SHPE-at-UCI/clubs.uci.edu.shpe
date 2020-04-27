@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+<!--Import the <head> from 'base.html'-->
+{% block header %}
+    <title>Meet the Team</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/team.css') }}"/>
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+{% from "components.html" import navbar_logged_in with context %}
+{{navbar_logged_in()}}
+
+<header class="text-center">
+    <div class="jumbotron bg">
+        <br>
+        <h1>MEET THE TEAM</h1>
+        <br>
+    </div>
+</header>
+  
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Fall 2019 - Spring 2020</h2>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+      <!-- Team Member 1 -->
+      <div class=" col-xl-4 col-md-3 mb-4">
+        <div class="card border-0 shadow">
+          <img src="../static/img/guillermo.jpg" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Guillermo Hernandez</h5>
+            <div class="card-text text-black-50">Technical Program Manager</div>
+            <hr>
+            <span class="icons">
+                <a href="mailto:hernandezguillermo27@gmail.com">
+                    <i class="fas fa-inbox fa-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/guillermo-hernandez/" target="_blank">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+                <a href="https://hernandezguillermo.com/" target="_blank">
+                    <i class="fas fa-globe fa-lg"></i>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Member 2 -->
+      <div class="col-xl-4 col-md-3 mb-4">
+        <div class="card border-0 shadow">
+          <img src="../static/img/default.jpg" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Brenda Cid</h5>
+            <div class="card-text text-black-50">Front-end Developer</div>
+            <hr>
+            <span class="icons">
+                <a href="mailto:bcid@uci.edu" target="_blank">
+                    <i class="fas fa-inbox fa-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/brenda-cid/" target="_blank">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Member 3 -->
+      <div class="col-xl-4 col-md-3 mb-4">
+        <div class="card border-0 shadow">
+          <img src="../static/img/default.jpg" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Eduardo Magdaleno</h5>
+            <div class="card-text text-black-50">Front-end Developer</div>
+            <hr>
+            <span class="icons">
+                <a href="mailto:emagdale8@gmail.com" target="_blank">
+                    <i class="fas fa-inbox fa-lg"></i>
+                </a>
+                <a href="http://linkedin.com/in/eduardo-Magdaleno-2a102a19a" target="_blank">
+                    <i class="fab fa-linkedin fa-lg"></i>
+                </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    <!-- /.row -->
+  
+  </div>
+  <!-- /.container -->
+
+{% endblock %}

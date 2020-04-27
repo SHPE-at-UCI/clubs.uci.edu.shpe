@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.extensions import auth, db
 import requests.exceptions
-import json 
+import json
 
 from time import time
 from sys import platform
@@ -38,8 +38,14 @@ def register():
             else:
                 flash("An error has occurred.")
 
-        
+
         if error is None:
+            points = {
+                "fall":0,
+                "winter":0,
+                "spring":0
+            }
+
             data = {
                 "first_name":request.form['first_name'],
                 "last_name":request.form['last_name'],
@@ -51,6 +57,9 @@ def register():
             user = auth.sign_in_with_email_and_password(email, password)
 
             results = db.child("users").child(user["localId"]).set(data)
+
+            pointsRes = db.child("points").child(user["localId"]).set(points)
+
             session.clear()
             session['user'] = user
             return redirect(url_for('dashboard'))
@@ -87,7 +96,7 @@ def load_logged_in_user():
     the database into ``g.user``."""
     user = session.get("user")
 
-    print(user)
+    # print(user)
     if user is None:
         g.user = None
     else:

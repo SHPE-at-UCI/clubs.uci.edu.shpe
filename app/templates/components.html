@@ -1,6 +1,6 @@
 {% macro navbar_logged_in() %}
 <nav class="navbar sticky-top">
-    <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
+    <a class="navbar-brand" href="{{ url_for('dashboard' )}}">SHPE | UCI Portal</a>
     <div class="dropdown">
         <button 
             type="button" 
@@ -9,8 +9,9 @@
             Hello Frontend Team!
         </button>
         <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="{{ url_for('search') }}">Search</a>
             <a class="dropdown-item" href="#">Portfolio</a>
-            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" href="{{ url_for('settings.settings') }}">Settings</a>
             <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
                 >Logout</a
             >
@@ -23,4 +24,12 @@
 <nav class="navbar sticky-top">
     <a class="navbar-brand" href="#">SHPE | UCI Portal</a>
 </nav>
+{% endmacro %}
+
+{% macro footer() %}
+<footer class="footer">
+    <div class="container">
+      <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+  </footer>
 {% endmacro %}

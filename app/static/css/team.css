@@ -1,0 +1,30 @@
+.jumbotron {
+    background-image: url('../img/meet_team_banner.jpg');
+    background-size: cover;
+}
+
+h1 {
+    color: white;
+}
+
+span a {
+    color: black;
+    padding: 0 10px 0 10px;
+}
+
+span a:hover:first-child {
+    color: green;
+}
+
+span a:hover:nth-child(2) {
+    color: skyblue;
+}
+
+span a:hover:nth-child(3) {
+    color: red;
+}
+
+.icons {
+    margin-top: 15px;
+}
+
