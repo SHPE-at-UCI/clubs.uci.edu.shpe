@@ -3,14 +3,16 @@
 <h1>
     {% block title %}
     <title>SHPE UCI - Registration</title>
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../static/css/register.css"/>
     {% endblock %}
 </h1>
 <!-- You can change Register to anything else.-->
 {% endblock %} {% block content %}
 <!-- All your body content goes here! -->
-{% from "components.html" import navbar_logged_out with context %}
-{{navbar_logged_out()}}
 
 <div class="form mx-auto" >
     <div id="registration-form">
@@ -55,15 +57,22 @@
             placeholder="Major" 
             name="major" 
             id="major" 
+            list="majors"
             required 
-         /> <br />
+         /> 
+            <datalist id="majors">
+            </datalist>
+            <br />
             <input 
             type="text" 
             placeholder="Year" 
             name="year" 
             id="year" 
+            list="years"
             required 
         />
+        <datalist id="years">
+        </datalist>
         <br>
         <input type="submit" value="Register" />
         </form>
@@ -71,5 +80,10 @@
         <span>Already have an account? <a href="{{ url_for('auth.login') }}">sign in</a></span>
     </div>
 </div>
+
+<script>
+    let data = {{ data | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
 
 {% endblock %}

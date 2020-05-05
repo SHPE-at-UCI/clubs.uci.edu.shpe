@@ -18,6 +18,15 @@
             {% block header %}{% endblock %}
         </header>
 
+        {% from "components.html" import navbar_logged_in, navbar_logged_out with context %}
+        
+
+        {% if g.user['displayName'] is defined %}
+            {{navbar_logged_in(g)}}
+        {% else %}
+            {{navbar_logged_out()}}
+        {% endif %}
+
         {% block content %} {% endblock %} 
 
         <script

@@ -26,4 +26,5 @@ def settings():
         db.child("users").child(g.user['localId']).update(data)
         
     user_data = db.child("users").child(g.user['localId']).get().val()
-    return render_template('/settings.html', user=user_data)
+    data = requests.get('https://us-central1-shpe-uci-tech.cloudfunctions.net/majors').text
+    return render_template('/settings.html', user=user_data, data=data)

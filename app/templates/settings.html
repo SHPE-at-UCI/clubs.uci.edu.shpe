@@ -4,6 +4,10 @@
     <title>SHPE UCI - Settings</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous"></script>
     {% block title %}
 
     {% endblock %}
@@ -11,8 +15,6 @@
 
 {% block content %}
 
-{% from "components.html" import navbar_logged_in with context %}
-{{navbar_logged_in()}}
 
 <div class="container mt-4">
 	<div class="row">
@@ -47,14 +49,18 @@
                 <div class = "form-group">
                     <label class = "control-label col-sm-2" for="major">Major: </label>
                     <div class="col-sm-10"> 
-                        <input name = "major" class="form-control" value="{{user['major']}}" id = "major"/>
+                        <input list="majors" name = "major" class="form-control" value="{{user['major']}}" id = "major"/>
+                        <datalist id="majors">
+                        </datalist>
                     </div>
                 </div>
 
                 <div class = "form-group">
                     <label class = "control-label col-sm-2" for="year">Year: </label>
                     <div class="col-sm-10"> 
-                        <input name = "year" class="form-control" value="{{user['year']}}" id = "year"/>
+                        <input list="years" name = "year" class="form-control" value="{{user['year']}}" id = "year"/>
+                        <datalist id="years">
+                        </datalist>
                     </div>
                 </div>
 
@@ -67,5 +73,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    let data = {{ data | tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/register.js') }}"></script>
 
 {% endblock %}

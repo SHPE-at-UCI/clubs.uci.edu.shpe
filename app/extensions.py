@@ -1,4 +1,5 @@
 import pyrebase, os
+from urllib.parse import quote
 
 config = {
   "apiKey": os.getenv("API_KEY"),

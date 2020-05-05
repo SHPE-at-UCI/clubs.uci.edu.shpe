@@ -5,14 +5,13 @@ from app.routes.auth import login_required
 from app.extensions import db
 # from flask_login import current_user
 
-
 def create_app():
     # create and configure the app
     app = Flask(__name__)
     app.secret_key = os.getenv("SECRET_KEY")
 
     from app.routes import auth, settings
-    from app.routes.search import get_all_users
+    from app.routes.search import get_all_users, get_user
 
     # Register routes
     app.register_blueprint(auth.bp)
@@ -51,6 +50,19 @@ def create_app():
     @app.route('/team')
     def team():
         return render_template('/team.html')
+
+    @app.route('/portfolio/<ucinet>')
+    @login_required
+    def portfolio(ucinet):
+        #print(f"Retrieving Data for {ucinet}")
+        userInfo = get_user(ucinet)
+        if userInfo == None:
+            return page_not_found("User not found")
+        return render_template('portfolio.html', userdata=userInfo)
+
+    @app.route('/meetteam')
+    def meet_team():
+        return 'MeetTeam'
 
     @app.route('/search')
     def search():

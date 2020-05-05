@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+<!--Import the <head> from 'base.html'-->
+{% block header %}
+    <title>SHPE UCI - Dashboard</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}"/>
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-4 py-2 rounded" id="member-banner">
+	<div class="row justify-content-md-left">
+		<div class="col-md-auto">
+			<img class="rounded-circle float-left" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png" alt="Profile Picture" class="img-thumbnail">
+		</div>
+		<div class="col py-4">
+			<h2>{{userdata.firstname}} {{userdata.lastname}}</h2>
+			<h4>{{userdata.major}} &#8226 {{userdata.year}}</h3>
+		</div>
+	</div>
+</div>
+<div class="container my-4 py-2 rounded">
+	<div class="row">
+		<div class="col-9 px-4">
+			<div class="row">
+				<h2>About Me</h2>
+			</div>
+			<div class="row bg-light">
+				<p class="mx-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nulla quam. 
+				Fusce eu tempus sapien. Quisque ornare nunc ac lacus placerat tincidunt. 
+				Vivamus sem est, condimentum at nulla in, luctus lobortis nulla. Sed aliquam eget nibh in aliquet.
+				Proin facilisis neque ut lectus elementum, ac consequat nisl fringilla. Aliquam nibh metus, 
+				fermentum in ultricies id, fringilla nec urna. Donec auctor convallis viverra. 
+				Proin ac rhoncus leo, ac imperdiet urna. Maecenas eu nisl mauris. Maecenas viverra tincidunt 
+				leo eu laoreet. Aliquam aliquet ornare ligula, id efficitur ligula hendrerit eu. Nunc finibus 
+				tincidunt commodo. Maecenas ornare diam vitae eros volutpat, ut interdum erat efficitur. Fusce congue 
+				magna et erat condimentum, et pulvinar mauris feugiat. Cras in eros lacus. Quisque egestas tempus finibus. 
+				Duis efficitur imperdiet nibh eu interdum. Mauris in velit in sapien dictum congue.
+				</p>
+			</div>
+			<div class="row">
+				<h2>Projects</h2>
+			</div>
+			<div class="row">
+				<div class="col card">
+					<div class="card-body">
+						<h5 class="Project Title"></h5>
+						<h6 class="Date"></h6>
+						<p class="card text">Project Description</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<h2>Events</h2>
+			<div class="row">
+				<div class="col card">
+					<div class="card-body">
+						<h5 class="card-title">SHPE event 1</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Date</h6>
+						<p class="card-text">Event</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col card">
+					<div class="card-body">
+						<h5 class="card-title">SHPE event 2</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Date</h6>
+						<p class="card-text">Event</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col card">
+					<div class="card-body">
+						<h5 class="card-title">SHPE event 3</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Date</h6>
+						<p class="card-text">Event</p>
+					</div>
+				</div>
+			</div>
+			<h2 class="pt-2">Points</h2>
+			<div class="row">
+				<div class="col card">
+					<div class="card-body">
+						<h5 class="Total Points">Total Points</h5>
+						<h6 class="card-subtitle mb-2 text-muted">Date</h6>
+						<p class="card-text">Event</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

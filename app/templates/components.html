@@ -1,4 +1,4 @@
-{% macro navbar_logged_in() %}
+{% macro navbar_logged_in(g) %}
 <nav class="navbar sticky-top">
     <a class="navbar-brand" href="{{ url_for('dashboard' )}}">SHPE | UCI Portal</a>
     <div class="dropdown">
@@ -9,8 +9,10 @@
             Hello Frontend Team!
         </button>
         <div class="dropdown-menu dropdown-menu-right">
+            {% set list1 = g.user['email'].split('@') %}
+            {% set userid = list1[0] %}
             <a class="dropdown-item" href="{{ url_for('search') }}">Search</a>
-            <a class="dropdown-item" href="#">Portfolio</a>
+            <a class="dropdown-item" href="{{ url_for('portfolio', ucinet=userid) }}">Portfolio</a>
             <a class="dropdown-item" href="{{ url_for('settings.settings') }}">Settings</a>
             <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
                 >Logout</a
