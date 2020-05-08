@@ -37,15 +37,19 @@ def create_app():
     @app.route('/dashboard')
     @login_required
     def dashboard():
-        user = db.child('users').child(g.user['localId']).get().val()               #fetch user information from database
-        userPoints = db.child('points').child(g.user['localId']).get().val()        #fetch user points from database
-        return render_template('dashboard.html', user = user, points = userPoints)  #load the dashboard with the user information
+        # fetch user information from database
+        user = db.child('users').child(g.user['localId']).get().val()
+        # fetch user points from database
+        userPoints = db.child('points').child(g.user['localId']).get().val()
+        # load the dashboard with the user information
+        return render_template('dashboard.html', user=user, points=userPoints)
 
     @app.route('/points')
     @login_required
     def points():
-        userPoints = userPoints = db.child('points').child(g.user['localId']).get().val()
-        return render_template('points.html', points = userPoints)
+        userPoints = userPoints = db.child(
+            'points').child(g.user['localId']).get().val()
+        return render_template('points.html', points=userPoints)
 
     @app.route('/team')
     def team():

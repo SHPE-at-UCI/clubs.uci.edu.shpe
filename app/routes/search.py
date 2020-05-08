@@ -1,7 +1,3 @@
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
-)
-
 from app.extensions import db, FBUser
 
 
@@ -19,15 +15,10 @@ def get_all_users() -> [dict]:
     return users
 
 def get_user(username: str) -> FBUser:
-	users_dict = db.child('users').get().val()
-	fb_user = None
-	for uid in users_dict:
-		if (users_dict[uid]['email'] == username+"@uci.edu"):
-			user_info = users_dict[uid]
-			fb_user = FBUser(uid, user_info)
-	return fb_user
-
-
-
-
-
+    users_dict = db.child('users').get().val()
+    fb_user = None
+    for uid in users_dict:
+        if (users_dict[uid]['email'] == username+"@uci.edu"):
+            user_info = users_dict[uid]
+            fb_user = FBUser(uid, user_info)
+    return fb_user
