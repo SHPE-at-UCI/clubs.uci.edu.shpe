@@ -57,12 +57,11 @@ def register():
 
             session.clear()
             session['user'] = user
-            return redirect(url_for('dashboard'))
-          
-    if request.method == 'GET':
-        if g.user is not None:
-            return redirect(url_for('dashboard'))
-    return render_template('/auth/register.html')
+            return redirect(url_for('dashboard')) 
+
+    if g.user is not None:
+        return redirect(url_for('dashboard'))
+    return render_template('/auth/register.html', data=data)
 
 
 @bp.route('/login', methods=('GET', 'POST'))
