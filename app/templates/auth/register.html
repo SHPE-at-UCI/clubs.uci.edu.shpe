@@ -1,88 +1,93 @@
+
 {% extends 'base.html' %} {% block header %}
 
 
-    {% block title %}
-    <title>SHPE UCI - Registration</title>
-    <script
-    src="https://code.jquery.com/jquery-3.5.0.min.js"
-    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-    crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../static/css/register.css"/>
-    {% endblock %}
+{% block title %}
+<title>SHPE UCI - Registration</title>
+<script
+src="https://code.jquery.com/jquery-3.5.0.min.js"
+integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+crossorigin="anonymous"></script>
+<link rel="stylesheet" href="../../static/css/register.css"/>
+{% endblock %}
 
 <!-- You can change Register to anything else.-->
 {% endblock %} {% block content %}
 <!-- All your body content goes here! -->
 
 <div class="form mx-auto" >
-    <div id="registration-form">
-        <div class="container">
-            {% for message in get_flashed_messages() %}
-            <div class="flash d-flex justify-content-center">{{ message }}</div>
-            {% endfor %} {% block content3 %} {% endblock %}
-          </div>
-        <h1 id="Form_name"> SHPE UCI Member Registration</h1>
-        <form method="post">
-            <input
-                type="text"
-                name="first_name"
-                placeholder="Enter first name"
-                id="first_name"
-                required
-            /><br />
-            <input
-                type="text"
-                placeholder="Last Name"
-                name="last_name"
-                id="last_name"
-                required
-            /><br />
-            <input
-                type="Email"
-                placeholder="Enter UCI email"
-                name="email"
-                id="email"
-                required
-            /><br />
-            <input
-                type="password"
-                placeholder="Enter password"
-                name="password"
-                id="password"
-                required
-            /><br />
-            <label for="Major">
-            <input 
-            type="text" 
-            placeholder="Major" 
-            name="major" 
-            id="major" 
-            list="majors"
-            required 
-         /> 
-            <datalist id="majors">
-            </datalist>
-            <br />
-            <input 
-            type="text" 
-            placeholder="Year" 
-            name="year" 
-            id="year" 
-            list="years"
-            required 
-        />
-        <datalist id="years">
+<div id="registration-form">
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="flash d-flex justify-content-center">{{ message }}</div>
+        {% endfor %} {% block content3 %} {% endblock %}
+      </div>
+    <h1 id="Form_name"> SHPE UCI Member Registration</h1>
+    <form method="post">
+        <input
+            type="text"
+            name="first_name"
+            placeholder="Enter first name"
+            id="first_name"
+            required
+        /><br />
+        <input
+            type="text"
+            placeholder="Last Name"
+            name="last_name"
+            id="last_name"
+            required
+        /><br />
+        <input
+            type="Email"
+            placeholder="Enter UCI email"
+            name="email"
+            id="email"
+            required
+        /><br />
+        <input
+            type="password"
+            placeholder="Enter password"
+            name="password"
+            id="password"
+            required
+        /><br />
+        <label for="Major">
+        <input 
+        type="text" 
+        placeholder="Major" 
+        name="major" 
+        id="major" 
+        list="majors"
+        required 
+     /> 
+        <datalist id="majors">
         </datalist>
-        <br>
-        <input type="submit" value="Register" />
-        </form>
-        <br>
-        <span>Already have an account? <a href="{{ url_for('auth.login') }}">sign in</a></span>
+        <br />
+        <input 
+        type="text" 
+        placeholder="Year" 
+        name="year" 
+        id="year" 
+        list="years"
+        required 
+    />
+    <datalist id="years">
+    </datalist>
+    <br>
+    <div style="text-align: center;">
+        {{ recaptcha }}
     </div>
+    <br>
+    <input type="submit" value="Register" />
+    </form>
+    <br>
+    <span>Already have an account? <a href="{{ url_for('auth.login') }}">sign in</a></span>
+</div>
 </div>
 
 <script>
-    let data = {{ data | tojson }};
+let data = {{ data | tojson }};
 </script>
 <script src="{{ url_for('static', filename='js/register.js') }}"></script>
 

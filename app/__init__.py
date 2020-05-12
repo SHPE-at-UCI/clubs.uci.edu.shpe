@@ -4,11 +4,20 @@ from flask import Flask, render_template, redirect, url_for, g
 from app.routes.auth import login_required
 from app.extensions import db
 # from flask_login import current_user
+from flask_recaptcha import ReCaptcha
 
 def create_app():
     # create and configure the app
     app = Flask(__name__)
     app.secret_key = os.getenv("SECRET_KEY")
+
+    # Configure and Start Google recaptcha
+    app.config.update(
+        RECAPTCHA_ENABLED= True,
+        RECAPTCHA_SITE_KEY= os.getenv("GOOGLE_SITE_KEY"),
+        RECAPTCHA_SECRET_KEY= os.getenv("GOOGLE_SECRET_KEY")
+    )
+    recaptcha = ReCaptcha(app=app)
 
     from app.routes import auth, settings
     from app.routes.search import get_all_users, get_user
@@ -54,6 +63,12 @@ def create_app():
     @app.route('/team')
     def team():
         return render_template('/team.html')
+
+
+    @app.route('/settings')
+    @login_required
+    def settings():
+        return render_template('settings.html')
 
     @app.route('/portfolio/<ucinet>')
     @login_required

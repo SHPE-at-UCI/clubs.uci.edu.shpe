@@ -6,7 +6,8 @@
             type="button" 
             class="btn btn-outline-light dropdown-toggle" 
             data-toggle="dropdown">
-            Hello Frontend Team!
+            {% set name = g.name %}
+            Hello, {{ name }}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             {% set list1 = g.user['email'].split('@') %}

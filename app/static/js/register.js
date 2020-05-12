@@ -17,5 +17,8 @@ const addYears = () => {
     })
 }
 
+$('.g-recaptcha').css('display', 'inline-block');
+
+
 addMajors();
 addYears();
