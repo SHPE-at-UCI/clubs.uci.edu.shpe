@@ -127,7 +127,7 @@ def load_logged_in_user():
     try:
         name = session.get('name')['first_name']
     except:
-        pass
+        name = None
 
     # print(user)
     if user is None:
