@@ -85,3 +85,29 @@ h2 {
     text-transform: capitalize;
     text-align: center;
 }
+
+
+.fc-event-title{
+    color: purple;
+    cursor: default;
+    pointer-events: none;        
+    text-decoration: none;
+}
+
+.fc-event-time {
+    color: purple;
+    cursor: default;
+    pointer-events: none;        
+    text-decoration: none;
+}
+
+.fc-daygrid-event-harness {
+    pointer-events: none;
+    text-decoration: none;
+    background-color: none;
+}
+
+
+.fc-event-main-frame {
+    cursor: default;
+}

@@ -4,6 +4,10 @@
     <title>SHPE UCI - Dashboard</title>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fullcalendar-5.3.0/lib/main.css') }}"/>
+    <script src="{{ url_for('static', filename='fullcalendar-5.3.0/lib/main.js') }}"></script>
     {% block title %}
     {% endblock %}
 {% endblock %}
@@ -46,13 +50,13 @@
 	<div class="row">
         <div class="col-md-12">
             <form method="post" action="#" id="#">
+                    <div id='calendar'></div>
                 <div class="form-group files">
                     <h2>Upload Your Resume </h2>
                     <input type="file" class="form-control">
                 </div>
                 <button type="submit" value="submit">Submit</button>
             </form>
-            <iframe src="https://calendar.google.com/calendar/embed?src=uci.edu_tjec7ma8ubkrlhhbjk89u7c7ec%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" width=100% height="600" frameborder="0" scrolling="no"></iframe>
         </div>
 	</div>
 </div>
