@@ -1,0 +1,230 @@
+{% extends 'base.html' %}
+<!--Import the <head> from 'base.html'-->
+{% block header %}
+    <title>SHPE UCI - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+    crossorigin="anonymous"></script>
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div id="admin">
+    <div id="budgetDiv">
+        <h2>Budget Reports</h2>
+        <div id="budgetReport"></div>
+    </div>
+    
+    <div id="carouselChartsSlide" class="carousel slide" data-ride="carousel"> 
+        <h2>Member Charts</h2>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div id="yearLevelChart" class="d-block w-100"></div><br>
+            </div>
+            <div class="carousel-item">
+                <div id="majorsChart" class="d-block w-100"></div><br>
+            </div>
+            <div class="carousel-item">
+                <div id="membershipChart" class="d-block w-100"></div><br>
+            </div>
+            <a class="carousel-control-prev" href="#carouselChartsSlide" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselChartsSlide" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only" >Next</span>
+              </a>
+    
+        </div>
+    
+    </div>
+    <table id="memberTable">
+        <thead>
+        <tr>
+          <th>email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Admin</th>
+          <th>Major</th>
+          <th>Year</th>
+          <th>Paid Member</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+          {% for user_dict in users %}
+            <td>{{user_dict["email"]}}</td> 
+            <td>{{user_dict["first_name"]}}</td>
+            <td>{{user_dict["last_name"]}}</td>
+            <td>{{user_dict["is_admin"]}}</td> <!--Make drop down menu have an update button to the each row Utilize ajax-->
+            <td>{{user_dict["major"]}}</td>
+            <td>{{user_dict["year"]}}</td>
+            <td>{{user_dict["paid_status"]}} </td> <!--Make drop down menu-->
+          </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+</div>
+
+<div id="notAdmin">
+    <h2>Admin Status Not Given</h2>
+    <div class="row bg-light">
+        <p class="mx-2">Only SHPE admin are allowed to view reports on members. Ask a page adminstrator
+            for access if needed.
+        </p>
+</div>
+
+<script type="text/javascript">
+
+    $('#admin').hide();
+    var uid = '{{uid}}';
+    var users = {{users | tojson}};
+    var budget = {{budget | tojson }};
+
+    for (var i = 0; i < users.length;i++){
+        if (uid == users[i]['uid']){
+            console.log(users[i]);
+            if (users[i]['is_admin']=='True'){
+                $('#admin').show();
+                $('#notAdmin').hide();
+            }
+        }
+    }
+    
+    majorsObject = {}
+    yearsObject = {}
+    membershipsObject = {}
+
+    for (var i = 0; i < users.length;i++){
+        var currMajor= users[i]['major'];
+        if (currMajor in majorsObject){
+            majorsObject[currMajor] += 1
+        } else{
+            majorsObject[currMajor] = 1
+        }
+
+        var currYear= users[i]['year'];
+        if (currYear in yearsObject){
+            yearsObject[currYear] += 1
+        } else{
+            yearsObject[currYear] = 1
+        }
+
+        var currMember= users[i]['paid_status'];
+        if (currMember in membershipsObject){
+            membershipsObject[currMember] += 1
+        } else{
+            membershipsObject[currMember] = 1
+        }
+    }
+
+    var lastyear = [budget['2019-2020'][9], budget['2019-2020'][10], budget['2019-2020'][11], budget['2019-2020'][12], budget['2019-2020'][1], budget['2019-2020'][2],
+    budget['2019-2020'][3], budget['2019-2020'][4], budget['2019-2020'][5],budget['2019-2020'][6], budget['2019-2020'][7], budget['2019-2020'][8]];
+    var thisYear = [budget['2020-2021'][9], budget['2020-2021'][10], budget['2020-2021'][11]];
+    var months = [
+    "September","October", "November", "December","January", "February", 
+    "March","April", "May", "June","July", "August"];
+    var dataMonths = [['Month','2019-2020','2020-2021']]
+
+    for (var x=0; x<12;x++){
+        var currMonth = []
+        currMonth.push(months.shift())
+        if (lastyear.length != 0)
+            currMonth.push(lastyear.shift())
+        if (thisYear.length != 0)
+            currMonth.push(thisYear.shift())
+        else
+            currMonth.push(0)
+        dataMonths.push(currMonth)
+    }
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawMajor);
+    google.charts.setOnLoadCallback(drawYear);
+    google.charts.setOnLoadCallback(drawMemberStatus);
+    google.charts.setOnLoadCallback(drawBudget);
+    var majorArr = [
+        ['Major','Count']
+    ]
+    var yearArr = [
+        ['Year','Count']
+    ]
+    var memberArr =[
+        ['Member Status','Count']
+    ]
+
+    for (key in majorsObject){
+        majorArr.push([key,majorsObject[key]])
+    }
+
+    for (key in yearsObject){
+        yearArr.push([key,yearsObject[key]])
+    }
+
+    for (key in membershipsObject){
+        memberArr.push([key,membershipsObject[key]])
+    }
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    function drawMajor() {
+        var data = google.visualization.arrayToDataTable(majorArr);
+        var options = {'backgroundColor':'#F3F3F3','title':'Majors', 'width':w, 'height':h, 'titleTextStyle':{
+            color: '#0071C5','fontSize':50
+        }};
+
+        var chart = new google.visualization.PieChart(document.getElementById('yearLevelChart'));
+        chart.draw(data, options);
+    }
+
+    function drawYear() {
+        var data = google.visualization.arrayToDataTable(yearArr);
+        var options = {'backgroundColor':'#F3F3F3','title':'Class Levels', 'width':w, 'height':h, 'titleTextStyle':{
+            color: '#0071C5','fontSize':50
+        }};
+
+        var chart = new google.visualization.PieChart(document.getElementById('majorsChart'));
+        chart.draw(data, options);
+    }
+    function drawMemberStatus() {
+        var data = google.visualization.arrayToDataTable(memberArr);
+        var options = {'backgroundColor':'#F3F3F3','title':'Membership Status', 'width':w, 'height':h, 'titleTextStyle':{
+            color: '#0071C5', 'fontSize':50
+        }};
+
+        var chart = new google.visualization.PieChart(document.getElementById('membershipChart'));
+        chart.draw(data, options);
+    }
+
+
+    function drawBudget() {
+        var data = google.visualization.arrayToDataTable(dataMonths);
+
+        var options = {
+          title: 'Year by Year Budget Analysis',
+          legend: { position: 'bottom' },
+          backgroundColor : '#F3F3F3',
+          height:(h/2),
+          titleTextStyle:{
+            color: '#0071C5', fontSize:25
+        }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('budgetReport'));
+
+        chart.draw(data, options);
+    }    
+
+
+</script>
+
+{% endblock %}

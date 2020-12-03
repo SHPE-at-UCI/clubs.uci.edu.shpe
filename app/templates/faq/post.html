@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+<!--Import the <head> from 'base.html'-->
+{% block header %}
+    <title>SHPE UCI - FAQ</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/faq.css') }}"/>
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container px-4" id="search-container">
+    <section class="row">
+        <div class="col" id="search">
+            <form>
+                <fieldset>
+                    <input onkeyup="" autocomplete="off" autofocus="autofocus" class="query"
+                           id="alumni_search" placeholder="Search" type="search">
+                    <p id="searchDescription">Search</p>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+

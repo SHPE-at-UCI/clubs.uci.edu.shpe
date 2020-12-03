@@ -64,14 +64,17 @@ def register():
                 "winter": 0,
                 "spring": 0
             }
-
             data = {
                 "first_name": request.form['first_name'],
                 "last_name": request.form['last_name'],
                 "email": email,
                 "major": request.form['major'],
-                "year": request.form['year']
+                "year": request.form['year'],
+                "resume_id": "",
+                "is_admin": "False",
+                "paid_status": "general"
             }
+
 
             user = auth.sign_in_with_email_and_password(email, password)
 
@@ -124,19 +127,18 @@ def load_logged_in_user():
     """If a user id is stored in the session, load the user object from
     the database into ``g.user``."""
     user = session.get("user")
+
     try:
         name = session.get('name')['first_name']
     except:
         name = None
 
-    # print(user)
     if user is None:
         g.user = None
         g.name = None
     else:
         g.user = user
         g.name = name
-    pass
 
 
 def login_required(view):
@@ -156,3 +158,6 @@ def logout():
     # https://github.com/thisbejim/Pyrebase/issues/284
     auth.current_user = None
     return redirect(url_for('auth.login'))
+
+
+# need to add none default value for file_id

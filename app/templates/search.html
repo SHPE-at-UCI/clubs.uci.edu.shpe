@@ -17,13 +17,14 @@
                 <fieldset>
                     <input onkeyup="filterSearch()" autocomplete="off" autofocus="autofocus" class="query"
                            id="alumni_search" placeholder="Search" type="search">
-                    <p id="searchDescription">Find SHPE | UCI Alumni.</p>
                 </fieldset>
             </form>
+            <p style="display:inline-block;" id="searchDescription">Find SHPE |</p>
+            <input type="checkbox" id="alumniFilterCheck" name="alumniFilterCheck" value="alumni">
+            <label for="alumniFilterCheck"> UCI Alumni</label><br>
         </div>
     </section>
 </div>
-
 <div class="container px-4" id="results-container">
     <div id="results">
         <ul id="user_results">

@@ -12,9 +12,16 @@
         <div class="dropdown-menu dropdown-menu-right">
             {% set list1 = g.user['email'].split('@') %}
             {% set userid = list1[0] %}
+            {% set curr_user = user%}
             <a class="dropdown-item" href="{{ url_for('search') }}">Search</a>
             <a class="dropdown-item" href="{{ url_for('portfolio', ucinet=userid) }}">Portfolio</a>
             <a class="dropdown-item" href="{{ url_for('settings.settings') }}">Settings</a>
+            <a class="dropdown-item" href="{{ url_for('faq.faq') }}">FAQ</a>
+            {% if curr_user != None %}
+                {% if curr_user['is_admin'] == 'True'%}
+                    <a class="dropdown-item" href="{{ url_for('admin') }}">Admin</a>
+                {% endif %}
+            {% endif %}
             <a class="dropdown-item" href="{{ url_for('auth.logout') }}"
                 >Logout</a
             >

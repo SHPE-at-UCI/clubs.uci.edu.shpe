@@ -49,17 +49,31 @@
 <div class="container">
 	<div class="row">
         <div class="col-md-12">
-            <form method="post" action="#" id="#">
+            <form method="POST" action="/dashboard" id="pdf-form" enctype="multipart/form-data">
                     <div id='calendar'></div>
                 <div class="form-group files">
                     <h2>Upload Your Resume </h2>
-                    <input type="file" class="form-control">
+                    <input id='inputfile' type="file" class="form-control" name="pdf_uploader" accept=".pdf*" required onChange='getoutput()'>
                 </div>
-                <button type="submit" value="submit">Submit</button>
+                <button id="submit_button" type="submit" value="submit" disabled>Submit</button>
             </form>
         </div>
 	</div>
 </div>
-
+<script>
+    // checks to see if file is a pdf alerts user if it is not pdf and will not allow user to sumbit a file
+    function getoutput(){
+        var filePath = inputfile.value;
+        console.log('filepath: ', filePath);
+        var extension = filePath.split('.').pop();
+        console.log('extension: ', extension);
+        if (extension !== "pdf") {
+            alert("Wrong extension reupload as pdf");
+        }
+        else {
+            document.getElementById("submit_button").disabled = false;
+        }
+    }
+</script>
 
 {% endblock %}

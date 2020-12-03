@@ -13,33 +13,27 @@ Download the ```.env``` file from slack and place it in the root directory of th
 
 Then execute the commands below depending on your system.
 
-###### Windows
+You must also have python 3.5 or higher installed on your machine. 
 
-```
-$ ./install-windows
-```
 
-###### Linux & Mac
+| Windows                         | Linux & Mac:             |
+|:------------------------------- | -------------------------|
+|```$ install-windows.bat ```     | ```$ ./install-linux```  |
 
-```
-$ ./install-linux
-```
+> _⚠️ Windows Note: If you received an error during the installing script, try the following:_
+> 1. Delete the ```venv``` folder
+> 2. Follow the directions [here](https://pycryptodome.readthedocs.io/en/latest/src/installation.html#windows-from-sources-python-3-5-and-newer) to install C++ build tools onto your machine
+> 3. Run the install-windows.bat script again
+
 
 #### 2) Run Web App
 
 On the root directory, run the following commands
 
-###### Windows
+| Windows                        | Linux & Mac:             |
+|:-------------------------------| -------------------------|
+|```$ runapp-windows.bat ```     | ```$ ./runapp```  |
 
-```
-$ ./runapp-windows
-```
-
-###### Linux & Mac
-
-```
-$ ./runapp
-```
 
 ### Contributing
 

@@ -2,6 +2,9 @@ venv/
 env
 .env
 *.env
+.env.txt
+*.env.txt
+env.*
 .vscode
 *.pyc
 __pycache__/
@@ -20,3 +23,5 @@ build/
 .DS_Store
 # PyCharm
 .idea/
+token.pickle
+johan_api_key.json

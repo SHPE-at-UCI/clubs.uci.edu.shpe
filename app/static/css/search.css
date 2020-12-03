@@ -24,6 +24,13 @@ h2 {
     color: #0071C5;
 }
 
+#filterAlumniCheck input {
+    margin: .4rem;
+}
+
+#filterAlumniCheck label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
 
 #search {
     -webkit-tap-highlight-color: transparent;
